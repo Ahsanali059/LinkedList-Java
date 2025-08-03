@@ -77,12 +77,74 @@ class SinglyLinkedList
         size++;
     }
 
+    // delete at start 
+    public void deleteAtStart()
+    {
+        if(head==null)
+        {
+            System.out.print("LinkedList is empty");
+        }
+        head = head.next;
+        size--;
+    }
+    public void deleteAtEnd()
+    {
+        if(head==null)
+        {
+            System.out.print("LinkedList is empty");
+        }
+
+        if(head.next==null)
+        {
+            head=tail=null;
+        }
+        else
+        {
+            Node current = head;
+            while (current!=tail) 
+            {
+                current=current.next;
+            }
+            current.next = null;
+            tail = current;
+        }
+
+    }
+
+    //Delete at specific position 
+    public void deleteAtPosition(int index)
+    {
+        if (index<0 || index >=size)  
+        {
+            System.out.println("Invalid Index");
+        }
+        if (index==0) 
+        {
+            deleteAtStart();
+            return;
+        }
+        Node current = head;
+        int i=0;
+        while (i<index-1) 
+        {
+            current = current.next;
+            i++;
+        }
+        Node toDelete = current.next;
+        current.next = toDelete.next;
+
+        if (toDelete==tail) {
+            tail=current;
+        }
+        size--;
+    }
+
    public void traverse()
    {
       Node temp = head;
       while (temp!=null) 
       {
-         System.out.println(" -> "+temp.data);
+         System.out.print(" -> "+temp.data);
          temp = temp.next;
       }
    }
@@ -91,11 +153,22 @@ class SingleLLImpl
 {
     public static void main(String[] args) 
     {
-        SinglyLinkedList ll = new SinglyLinkedList();
-        ll.insertAtStart(1);
-        ll.insertAtEnd(2);
+        SinglyLinkedList list = new SinglyLinkedList();
+         list.insertAtEnd(10);
+        list.insertAtEnd(20);
+        list.insertAtEnd(30);
+        list.traverse(); // 10 -> 20 -> 30 -> null
 
-        ll.traverse();
+        list.deleteAtStart();
+        list.traverse(); // 20 -> 30 -> null
+
+        list.deleteAtEnd();
+        list.traverse(); // 20 -> null
+
+        list.insertAtEnd(40);
+        list.insertAtEnd(50);
+        list.deleteAtPosition(1);
+        list.traverse(); // 20 -> 50 -> null
 
         
     }
