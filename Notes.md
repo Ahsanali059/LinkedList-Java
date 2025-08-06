@@ -48,7 +48,6 @@ How Linkedlist is different from arrays ?
    -> Can be singly or doubly linked
    -> Useful in applications like task scheduling, music playlists
 
-
 ========================================
 Linkedlist Predined Class Implementation
 ========================================
